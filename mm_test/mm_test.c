@@ -1,6 +1,6 @@
 /* A simple test harness for memory allocation. */
 
-#include "mm_alloc.h"
+#include "../mm_alloc/mm_alloc.h"
 #include <stdio.h>
 int main(int argc, char **argv)
 {

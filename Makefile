@@ -1,5 +1,5 @@
 SRCS=mm_alloc.c mm_test.c
-EXECUTABLES=malloc_test
+EXECUTABLES=allocator
 
 CC=gcc
 CFLAGS=-g -Wall
@@ -9,7 +9,8 @@ OBJS=$(SRCS:.c=.o)
 
 all: $(EXECUTABLES) run
 
-run: malloc_test	./malloc_test
+run: allocator
+	./allocator
 
 $(EXECUTABLES): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $@  
@@ -18,4 +19,5 @@ $(EXECUTABLES): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(EXECUTABLES) $(OBJS)
+	rm -rf $(EXECUTABLES) $(OBJS)
+

@@ -1,22 +1,18 @@
 /*
  * mm_alloc.c
  *
- * Stub implementations of the mm_* routines. Remove this comment and provide
- * a summary of your allocator's design here.
+ * Stub implementations of the mm_* routines.
+ *
  */
 
 #include "mm_alloc.h"
 
 #include <string.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
 #include <stdint.h>
 #include <unistd.h>
-#include <sys/resource.h>
 #define MAXIMUM_SEGMENT_SIZE 1000
-/* Your final implementation should comment out this macro. */
-//#define MM_USE_STUBS
+
 
 void* heap_start;
 
@@ -126,15 +122,7 @@ void* move_breakline(size_t size){	//moves the brk and create a new block based 
 	list_size++;
 	return new_block->ptr + sizeof(struct s_block);
 }
-void* mm_malloc(size_t size)
-{
-/*
-#ifdef MM_USE_STUBS
-    return calloc(1, size);
-#else
-#error Not implemented.
-#endif
-*/
+void* mm_malloc(size_t size){
 	if(size == 0)
 		return NULL;
 	if(size > MAXIMUM_SEGMENT_SIZE){
@@ -149,8 +137,6 @@ void* mm_malloc(size_t size)
 		sbrk(sbrk(0) - heap_start + 1 * (sizeof(struct s_block) + size));//moved break up
 		
 		struct s_block* first_block = sbrk_backup;
-		struct s_block* second_block = sbrk_backup + sizeof(struct s_block) + size;
-		
 		first_block->size = size;
 		first_block->next = NULL; // this one is new
 		first_block->prev = NULL;
@@ -194,15 +180,7 @@ void* mm_malloc(size_t size)
 	return NULL;
 }
 
-void* mm_realloc(void* ptr, size_t size)
-{
-/*
-#ifdef MM_USE_STUBS
-    return realloc(ptr, size);
-#else
-#error Not implemented.
-#endif
-*/
+void* mm_realloc(void* ptr, size_t size){
 	if(size == 0)
 		return NULL;
 	if(ptr == NULL)
@@ -215,23 +193,22 @@ void* mm_realloc(void* ptr, size_t size)
 			if(block->size == size)
 				return block->ptr + sizeof(struct s_block);
 			if(block->size > size){
-				int block_size = block->size;
-                                char c[block ->size];
-                                for(int i = 0; i < block->size; i++){
-                                        c[i] = *(block->data + i);
-                                }
-                                mm_free(ptr);
-                                void* new_ptr = mm_malloc(size);
-                                memcpy(new_ptr, c , size);
-                                return new_ptr;
+                char c[block ->size];
+                for(int i = 0; i < block->size; i++){
+                    c[i] = *(block->data + i);
+                }
+                mm_free(ptr);
+                void* new_ptr = mm_malloc(size);
+                memcpy(new_ptr, c , size);
+                return new_ptr;
 			
 			}
 			if(block->size < size){
 				int block_size = block->size;
 				char c[block ->size];
 				for(int i = 0; i < block->size; i++){
-                                        c[i] = *(block->data + i);
-                                }
+                    c[i] = *(block->data + i);
+                }
 				mm_free(ptr);
 				void* new_ptr = mm_malloc(size);
 				memcpy(new_ptr, c , block_size);
@@ -244,15 +221,7 @@ void* mm_realloc(void* ptr, size_t size)
 	return NULL;
 }
 
-void mm_free(void* ptr)
-{
-/*
-#ifdef MM_USE_STUBS
-    free(ptr);
-#else
-#error Not implemented.
-#endif
-*/
+void mm_free(void* ptr){
 	if(ptr == NULL)
 		perror("NULL_POINTER_ERROR");
 	else{

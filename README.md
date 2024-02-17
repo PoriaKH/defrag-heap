@@ -1,5 +1,5 @@
 # defrag-heap
-defrag-heap is a custom heap memory, in essence, I created customized versions of the functionsmalloc,realloc, andfreethat when being used, it optimizes the de-fragmentation of heap address allocation.
+defrag-heap is a custom heap memory, in essence, I created customized versions of the functions `malloc`,`realloc`, and `free` that when being used, it optimizes the de-fragmentation of heap address allocation.
 
 ### Usage
 Write your own code in `./mm_alloc/mm_alloc.c`.<br/>

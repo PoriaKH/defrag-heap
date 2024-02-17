@@ -4,7 +4,7 @@ defrag-heap is a custom heap memory, in essence, I created customized versions o
 ### Usage
 Write your own code in `./mm_alloc/mm_alloc.c`.<br/>
 <br/>
-You can use methods such as `mm_malloc()`, `mm_free()`, `mm_realloc()` which are optimized simulation of `malloc()`, `free()`, `realloc()`<br/>
+You can use methods such as `mm_malloc()`, `mm_free()` and `mm_realloc()` which are optimized simulation of `malloc()`, `free()` and `realloc()`<br/>
 </br>
 Example:
 ```
